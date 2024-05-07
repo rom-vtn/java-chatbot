@@ -29,9 +29,10 @@ public class Book {
         return true;
     }
 
-    public Book(String title, String author, String isbn, boolean isAvailable) throws IllegalArgumentException {
+    public Book(String title, String author, String isbn, String bookId, boolean isAvailable) throws IllegalArgumentException {
         this.title = checkForNull("title", title);
         this.author = checkForNull("author", author);
+        this.bookId = checkForNull("bookId", bookId);
         this.isbn = checkForNull("isbn", isbn);
         this.isAvailable = isAvailable;
     }

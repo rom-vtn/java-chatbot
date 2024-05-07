@@ -7,6 +7,10 @@ public class Library {
     
     private static int BOOK_NOT_FOUND = -1;
 
+    public Library() {
+        books = new ArrayList<>();
+    }
+
     /**
      * Searches for the given bookId in the `books` ArrayList
      * @param bookId The book ID to look for
