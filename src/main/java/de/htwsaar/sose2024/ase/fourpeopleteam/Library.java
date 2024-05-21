@@ -79,12 +79,10 @@ public class Library {
             return false;
         }
         int index = getBookIndex(book.getBookId());
-        if (index == BOOK_NOT_FOUND) {
+        if (index != BOOK_NOT_FOUND) {
             return false;
         }
-        //TODO implement adding books
-        // return books.add(book);
-        return true;
+        return books.add(book);
     }
 
     /**
@@ -111,8 +109,11 @@ public class Library {
         return removeBookAtIndex(index);
     }
     private boolean removeBookAtIndex(int index) {
-        //TODO implement removing books
-        // books.remove(index);
+        try {
+            books.remove(index);
+        } catch (IndexOutOfBoundsException e) {
+            return false;
+        }
         return true;
     }
 

@@ -24,8 +24,7 @@ public class Book {
     }
 
     public boolean setBookAvailability(boolean isAvailable) {
-        // this.isAvailable = isAvailable;
-        //TODO implement setting book availability
+        this.isAvailable = isAvailable;
         return true;
     }
 
@@ -49,33 +48,29 @@ public class Book {
 
     @Override
     public String toString() {
-        //TODO implement toString
-        return "REPRESENTATION IS HERE, YAY!";
-        // return "Book{"
-        //     + "title=" + getTitle()
-        //     +",author=" + getAuthor()
-        //     +",isbn=" + getIsbn()
-        //     +",bookId" + getBookId()
-        //     +",isAvailable" + isAvailable()
-        //     +"}";
+        return "Book{"
+            + "title=" + getTitle()
+            +",author=" + getAuthor()
+            +",isbn=" + getIsbn()
+            +",bookId" + getBookId()
+            +",isAvailable" + isAvailable()
+            +"}";
     }
 
     @Override
     public boolean equals(Object other) {
-        //TODO implement equals method
-        return false;
-        // if (other == null) {
-        //     return false;
-        // }
-        // if (other.getClass() != this.getClass()) {
-        //     return false;
-        // }
-        // Book book = (Book) other;
-        // return
-        //     getAuthor().equals(book.getAuthor()) &&
-        //     getBookId().equals(book.getBookId()) &&
-        //     getIsbn().equals(book.getIsbn()) &&
-        //     getTitle().equals(book.getTitle()) &&
-        //     isAvailable() == book.isAvailable;
+        if (other == null) {
+            return false;
+        }
+        if (other.getClass() != this.getClass()) {
+            return false;
+        }
+        Book book = (Book) other;
+        return
+            getAuthor().equals(book.getAuthor()) &&
+            getBookId().equals(book.getBookId()) &&
+            getIsbn().equals(book.getIsbn()) &&
+            getTitle().equals(book.getTitle()) &&
+            isAvailable() == book.isAvailable;
     }
 }
