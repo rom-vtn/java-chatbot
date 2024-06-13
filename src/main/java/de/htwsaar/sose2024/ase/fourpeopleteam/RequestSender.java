@@ -70,6 +70,7 @@ public class RequestSender {
     private String encodeRequest(Conversation conversation) {
         JSONObject conv = new JSONObject();
         conv.put("messages", conversation.toJson());
+        conv.put("max_tokens", 256);
         return conv.toString();
     }
 
