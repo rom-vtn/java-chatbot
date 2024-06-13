@@ -7,7 +7,7 @@ public class Chatbot{
     public Chatbot(UserInterface userInterface, RequestSender requestSender){
         this.userInterface= userInterface;
         this.requestSender= requestSender;
-        this.conversation = new Conversation();
+        this.conversation = Conversation.makeStandardConversation();
     }
 
     public boolean conversationRound(){
