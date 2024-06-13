@@ -1,7 +1,9 @@
 package de.htwsaar.sose2024.ase.fourpeopleteam;
 
 import java.util.ArrayList;
-import java.util.StringJoiner;
+
+import org.json.JSONArray;
+import org.json.JSONObject;
 
 public class Conversation {
     private ArrayList<Message> messages;
@@ -23,12 +25,12 @@ public class Conversation {
         messages.add(message);
     }
 
-    public String toJson() {
-        StringJoiner sj = new StringJoiner(",");
+    public JSONArray toJson() {
+        JSONArray arr = new JSONArray();
         for (Message m : messages) {
-            sj.add(m.toJson());
+            arr.put(m.toJson());
         }
-        return "[" + sj.toString() + "]";
+        return arr;
     }
 
     public static class Message {
@@ -48,8 +50,11 @@ public class Conversation {
             return new Message("assistant", content);
         } 
 
-        public String toJson() {
-            return "{\"role\":\"" + role + "\",\"content\":\"" + content + "\"}";
+        public JSONObject toJson() {
+            JSONObject obj = new JSONObject();
+            obj.put("role", this.role);
+            obj.put("content", this.content);
+            return obj;
         }
 
         public String getRole() {

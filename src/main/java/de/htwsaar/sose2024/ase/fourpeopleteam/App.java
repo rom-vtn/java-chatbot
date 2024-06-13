@@ -8,7 +8,12 @@ public class App
 {
     public static void main( String[] args )
     {
-        System.out.println( "Hello World!" );
+        UserInterface ui = new CommandLineInterface();
+        RequestSender rs = new RequestSender("https://gptapi.oc.romaneviton.fr");
+        Chatbot chatbot = new Chatbot(ui, rs);
+        while (chatbot.conversationRound()) {
+        }
+        System.out.println("Done!!");
     }
 
     public static int add(int a, int b) {

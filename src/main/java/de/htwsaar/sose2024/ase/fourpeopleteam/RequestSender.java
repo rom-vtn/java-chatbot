@@ -68,8 +68,9 @@ public class RequestSender {
     }
 
     private String encodeRequest(Conversation conversation) {
-        String bodyString = "{\"messages`\": " + conversation.toJson() + "}";
-        return bodyString;
+        JSONObject conv = new JSONObject();
+        conv.put("messages", conversation.toJson());
+        return conv.toString();
     }
 
     private String attemptSendingMessage(String bodyString) throws URISyntaxException, IOException, InterruptedException {
