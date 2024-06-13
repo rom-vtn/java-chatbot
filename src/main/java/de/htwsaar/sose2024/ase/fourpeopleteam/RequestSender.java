@@ -18,6 +18,10 @@ public class RequestSender {
     private String baseUrl;
     public static int MAX_ATTEMPTS = 3;
 
+    public RequestSender(String baseUrl) {
+        this.baseUrl = baseUrl;
+    }
+
     public Conversation.Message requestNextMessage(Conversation conversation) throws Exception {
         String requestBody = encodeRequest(conversation);
         String responseBody = null;
