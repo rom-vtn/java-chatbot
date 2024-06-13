@@ -19,11 +19,13 @@ public class RequestSender {
     public static int MAX_ATTEMPTS = 3;
 
     public Conversation.Message requestNextMessage(Conversation conversation) throws Exception {
+        String requestBody = encodeRequest(conversation);
         String responseBody = null;
         int i;
         for (i = 0; i < MAX_ATTEMPTS; i++) {
             try {
-                responseBody = attemptSendingMessage(conversation);
+                responseBody = attemptSendingMessage(requestBody);
+                break;
             } catch (URISyntaxException e) {
                 throw new RuntimeException(e);
             } catch (IOException | InterruptedException e) {
@@ -61,8 +63,12 @@ public class RequestSender {
         return Conversation.Message.makeAssistantMessage(content);
     }
 
-    private String attemptSendingMessage(Conversation conversation) throws URISyntaxException, IOException, InterruptedException {
+    private String encodeRequest(Conversation conversation) {
         String bodyString = "{\"messages`\": " + conversation.toJson() + "}";
+        return bodyString;
+    }
+
+    private String attemptSendingMessage(String bodyString) throws URISyntaxException, IOException, InterruptedException {
         BodyPublisher bp = BodyPublishers.ofString(bodyString);
 
         HttpClient client = HttpClient.newHttpClient();
