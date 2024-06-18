@@ -2,19 +2,23 @@ package de.htwsaar.sose2024.ase.fourpeopleteam;
 
 import java.util.Scanner;
 
+/** TODO docs. */
 public class CommandLineInterface implements UserInterface {
-    private Scanner scanner;
+  private Scanner scanner;
 
-    public void show(String content) {
-        System.out.println(content);
-    }
+  /** TODO docs. */
+  public void show(String content) {
+    System.out.println(content);
+  }
 
-    public String getInput() {
-        System.out.print("> ");
-        return scanner.nextLine();
-    }
+  /** TODO docs. */
+  public String getInput() {
+    System.out.print("> ");
+    return scanner.nextLine();
+  }
 
-    public CommandLineInterface() {
-        scanner = new Scanner(System.in);
-    }
+  /** TODO docs. */
+  public CommandLineInterface() {
+    scanner = new Scanner(System.in);
+  }
 }
