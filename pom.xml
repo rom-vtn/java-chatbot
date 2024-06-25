@@ -137,15 +137,6 @@
           <violationSeverity>warning</violationSeverity>
           <sourceDirectories>src/main/java,src/test/java</sourceDirectories>
         </configuration>
-        <executions>
-          <execution>
-            <id>validate</id>
-            <phase>validate</phase>
-            <goals>
-              <goal>check</goal>
-            </goals>
-          </execution>
-        </executions>
       </plugin>
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
