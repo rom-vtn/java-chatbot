@@ -7,11 +7,13 @@ public class CommandLineInterface implements UserInterface {
   private Scanner scanner;
 
   /** TODO docs. */
+  @Override
   public void show(String content) {
     System.out.println(content);
   }
 
   /** TODO docs. */
+  @Override
   public String getInput() {
     System.out.print("> ");
     return scanner.nextLine();
@@ -19,6 +21,6 @@ public class CommandLineInterface implements UserInterface {
 
   /** TODO docs. */
   public CommandLineInterface() {
-    scanner = new Scanner(System.in);
+    scanner = new Scanner(System.in, "UTF_8");
   }
 }

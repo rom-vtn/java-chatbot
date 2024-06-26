@@ -1,6 +1,8 @@
 package de.htwsaar.sose2024.ase.fourpeopleteam;
 
 import java.util.ArrayList;
+import java.util.Objects;
+
 import org.json.JSONArray;
 import org.json.JSONObject;
 
@@ -78,24 +80,23 @@ public class Conversation {
 
     @Override
     public boolean equals(Object other) {
-      if (other == null) {
-        return false;
-      }
-      if (this.getClass() != other.getClass()) {
+      if (!(other instanceof Message)) {
         return false;
       }
       Message otherMessage = (Message) other;
       return otherMessage.getRole().equals(role)
         && otherMessage.getContent().equals(content);
     }
+
+    @Override
+    public int hashCode() {
+      return Objects.hash(this.role, this.content);
+    }
   }
 
   @Override
   public boolean equals(Object other) {
-    if (other == null) {
-      return false;
-    }
-    if (this.getClass() != other.getClass()) {
+    if (!(other instanceof Conversation)) {
       return false;
     }
     Conversation otherConv = (Conversation) other;
@@ -105,10 +106,15 @@ public class Conversation {
     for (int i = 0; i < messages.size(); i++) {
       Message ourMessage = messages.get(i);
       Message theirMessage = otherConv.messages.get(i);
-      if (!(ourMessage.equals(theirMessage))) {
+      if (!ourMessage.equals(theirMessage)) {
         return false;
       }
     }
     return true;
+  }
+
+  @Override
+  public int hashCode() {
+    return this.messages.hashCode();
   }
 }
