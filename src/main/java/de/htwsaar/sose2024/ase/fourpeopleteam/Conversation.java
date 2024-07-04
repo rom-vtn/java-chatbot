@@ -2,7 +2,6 @@ package de.htwsaar.sose2024.ase.fourpeopleteam;
 
 import java.util.ArrayList;
 import java.util.Objects;
-
 import org.json.JSONArray;
 import org.json.JSONObject;
 
