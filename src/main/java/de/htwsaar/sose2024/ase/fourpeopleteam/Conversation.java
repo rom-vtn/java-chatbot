@@ -5,7 +5,10 @@ import java.util.Objects;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
-/** TODO docs. */
+/**
+ * Represents a conversation consisting of messages exchanged between different roles
+ * (the User and the assistant)
+ */
 public class Conversation {
   private ArrayList<Message> messages;
 
@@ -13,7 +16,10 @@ public class Conversation {
     messages = new ArrayList<>();
   }
 
-  /** TODO docs. */
+  /**
+   * creates a standard conversation with an initial system message
+   *@return new conversation with a predefined message
+   */
   public static Conversation makeStandardConversation() {
     Conversation conv = new Conversation();
     Message firstMessage = new Message(
@@ -25,12 +31,18 @@ public class Conversation {
     return conv;
   }
 
-  /** TODO docs. */
+  /**
+   * Add a message to the conversation.
+   *@param message to be add.
+   */
   public void add(Message message) {
     messages.add(message);
   }
 
-  /** TODO docs. */
+  /**
+   * converts the conversation to a JSON array representing its messages
+   * @return the JSON array
+   */
   public JSONArray toJson() {
     JSONArray arr = new JSONArray();
     for (Message m : messages) {
@@ -39,7 +51,9 @@ public class Conversation {
     return arr;
   }
 
-  /** TODO docs. */
+  /** The Message class represents a single message in the conversation,
+   * including its role and content.
+   */
   public static class Message {
     private String role;
     private String content;
@@ -49,17 +63,26 @@ public class Conversation {
       this.content = content;
     }
 
-    /** TODO docs. */
+    /** * Creates a user message with the specified content.
+     * @param content the content of the user message
+     * @return a new Message with the role "user"
+     */
     public static Message makeUserMessage(String content) {
       return new Message("user", content);
     }
 
-    /** TODO docs. */
+    /** * Creates an assistant message with the specified content.
+     * @param content the content of the assistant message
+     * @return a new Message with the role "assistant"
+     */
     public static Message makeAssistantMessage(String content) {
       return new Message("assistant", content);
     } 
 
-    /** TODO docs. */
+    /**
+     * Converts the message to a JSON object representing its attributes
+     * @return the JSON object representing the message
+      */
     public JSONObject toJson() {
       JSONObject obj = new JSONObject();
       obj.put("role", this.role);
@@ -67,12 +90,16 @@ public class Conversation {
       return obj;
     }
 
-    /** TODO docs. */
+    /** Gets the role of the sender of the message
+     * @return the role of the sender
+     */
     public String getRole() {
       return role;
     }
 
-    /** TODO docs. */
+    /** Gets the content of the message
+     * @return the content of the sender
+     */
     public String getContent() {
       return content;
     }

@@ -12,7 +12,8 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-/** TODO docs. */
+/** The class RequestSender  manages the sending of HTTP requests to a server
+ *  to obtain responses for the chatbot's conversation. */
 public class RequestSender {
   private String baseUrl;
   public static int MAX_ATTEMPTS = 3;
