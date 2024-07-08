@@ -7,7 +7,7 @@ import org.json.JSONObject;
 
 /**
  * Represents a conversation consisting of messages exchanged between different roles
- * (the User and the assistant)
+ * (the User and the assistant).
  */
 public class Conversation {
   private ArrayList<Message> messages;
@@ -17,8 +17,9 @@ public class Conversation {
   }
 
   /**
-   * creates a standard conversation with an initial system message
-   *@return new conversation with a predefined message
+   * Creates a standard conversation with an initial system message.
+   *
+   * @return new conversation with a predefined message
    */
   public static Conversation makeStandardConversation() {
     Conversation conv = new Conversation();
@@ -33,14 +34,16 @@ public class Conversation {
 
   /**
    * Add a message to the conversation.
-   *@param message to be add.
+   *
+   * @param message to be added.
    */
   public void add(Message message) {
     messages.add(message);
   }
 
   /**
-   * converts the conversation to a JSON array representing its messages
+   * converts the conversation to a JSON array representing its messages.
+   *
    * @return the JSON array
    */
   public JSONArray toJson() {
@@ -63,7 +66,9 @@ public class Conversation {
       this.content = content;
     }
 
-    /** * Creates a user message with the specified content.
+    /** 
+     * Creates a user message with the specified content.
+     *
      * @param content the content of the user message
      * @return a new Message with the role "user"
      */
@@ -71,7 +76,9 @@ public class Conversation {
       return new Message("user", content);
     }
 
-    /** * Creates an assistant message with the specified content.
+    /** 
+     * Creates an assistant message with the specified content.
+     *
      * @param content the content of the assistant message
      * @return a new Message with the role "assistant"
      */
@@ -80,9 +87,10 @@ public class Conversation {
     } 
 
     /**
-     * Converts the message to a JSON object representing its attributes
+     * Converts the message to a JSON object representing its attributes.
+     *
      * @return the JSON object representing the message
-      */
+     */
     public JSONObject toJson() {
       JSONObject obj = new JSONObject();
       obj.put("role", this.role);
@@ -90,14 +98,18 @@ public class Conversation {
       return obj;
     }
 
-    /** Gets the role of the sender of the message
+    /** 
+     * Gets the role of the sender of the message.
+     *
      * @return the role of the sender
      */
     public String getRole() {
       return role;
     }
 
-    /** Gets the content of the message
+    /** 
+     * Gets the content of the message.
+     *
      * @return the content of the sender
      */
     public String getContent() {
