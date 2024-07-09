@@ -1,9 +1,10 @@
 package de.htwsaar.sose2024.ase.fourpeopleteam;
 
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
 
+import org.json.JSONArray;
 import org.json.JSONObject;
 import org.junit.Test;
 
@@ -26,9 +27,9 @@ public class ConversationTest {
         "user",
         "A sample message.");
     
-    assertTrue(baseMsg.equals(identicalBaseMsg));
-    assertFalse(baseMsg.equals(changedContentMsg));
-    assertFalse(baseMsg.equals(changedRoleMsg));
+    assertEquals(baseMsg, identicalBaseMsg);
+    assertNotEquals(baseMsg, changedContentMsg);
+    assertNotEquals(baseMsg, changedRoleMsg);
   }
 
   @Test
@@ -50,4 +51,29 @@ public class ConversationTest {
     Conversation.Message reconstructed = Conversation.Message.fromJsonObject(reconstructedJson);
     assertEquals(msg, reconstructed);
   }
+
+  @Test
+  public void conversationEqualityTest() {
+    Conversation c1 = new Conversation();
+    Conversation c2 = new Conversation();
+    Conversation.Message msg = Conversation.Message.makeUserMessage("sample user message content.");
+    assertEquals(c1, c2);
+    c1.add(msg);
+    assertNotEquals(c1, c2);
+    c2.add(msg);
+    assertEquals(c1, c2);
+  }
+
+  @Test
+  public void conversationJsonTest() throws ChatbotException {
+    Conversation conversation = Conversation.makeStandardConversation();
+    Conversation.Message msg = Conversation.Message.makeUserMessage("custom user string.");
+    conversation.add(msg);
+    JSONArray asJson = conversation.toJson();
+    System.out.println(asJson);
+    Conversation reconstructed = Conversation.fromJsonArray(asJson);
+    assertEquals(conversation, reconstructed);
+  }
+
+  //TODO make sure Conversation is tested appropriately
 }

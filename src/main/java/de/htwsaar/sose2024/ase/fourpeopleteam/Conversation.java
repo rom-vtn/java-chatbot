@@ -12,6 +12,9 @@ import org.json.JSONObject;
 public class Conversation {
   private ArrayList<Message> messages;
 
+  /** Creates a Conversation containing no messages whatsoever
+   * (no system message either). 
+   */
   public Conversation() {
     messages = new ArrayList<>();
   }
@@ -30,6 +33,24 @@ public class Conversation {
     conv.add(firstMessage);
 
     return conv;
+  }
+
+  /**
+   * Builds a conversation from the a JSON array,
+   * which is assumed to contain all the messages as JSON as well.
+   *
+   * @param jsonArray The json array to build the conversation from
+   * @return the resulting conversation
+   * @throws ChatbotException if something went wrong
+   */
+  public static Conversation fromJsonArray(JSONArray jsonArray) throws ChatbotException {
+    Conversation conversation = new Conversation();
+    for (int i = 0; i < jsonArray.length(); i++) {
+      JSONObject jsonObject = jsonArray.getJSONObject(i);
+      Conversation.Message msg = Conversation.Message.fromJsonObject(jsonObject);
+      conversation.add(msg);
+    }
+    return conversation;
   }
 
   /**
