@@ -70,7 +70,6 @@ public class ConversationTest {
     Conversation.Message msg = Conversation.Message.makeUserMessage("custom user string.");
     conversation.add(msg);
     JSONArray asJson = conversation.toJson();
-    System.out.println(asJson);
     Conversation reconstructed = Conversation.fromJsonArray(asJson);
     assertEquals(conversation, reconstructed);
   }
