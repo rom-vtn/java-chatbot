@@ -45,7 +45,9 @@ public class ConversationTest {
   public void messageJsonTest() throws ChatbotException {
     Conversation.Message msg = Conversation.Message.makeAssistantMessage("test assistant message.");
     JSONObject asJson = msg.toJson();
-    Conversation.Message reconstructed = Conversation.Message.fromJsonObject(asJson);
+    String asString = asJson.toString();
+    JSONObject reconstructedJson = new JSONObject(asString);
+    Conversation.Message reconstructed = Conversation.Message.fromJsonObject(reconstructedJson);
     assertEquals(msg, reconstructed);
   }
 }
