@@ -3,6 +3,5 @@ updates:
   - package-ecosystem: "maven"
     directories:
       - "/"
-    directory: "/"
     schedule:
       interval: "weekly"
