@@ -84,7 +84,38 @@ public class Conversation {
      */
     public static Message makeAssistantMessage(String content) {
       return new Message("assistant", content);
-    } 
+    }
+
+    /**
+     * Creates a message from the given JSON object.
+     *
+     * @param jsonObject The JSON Object to decode.
+     * @return the message contained in the response
+     */
+    public static Message fromJsonObject(JSONObject jsonObject) throws ChatbotException {
+      JSONArray choices = jsonObject.optJSONArray("choices");
+      if (choices == null) {
+        throw new ChatbotException("null choices");
+      }
+      JSONObject firstChoice = choices.getJSONObject(0);
+      if (firstChoice == null) {
+        throw new ChatbotException("null first choice");
+      }
+      JSONObject jsonMessage = firstChoice.getJSONObject("message");
+      if (jsonMessage == null) {
+        throw new ChatbotException("null json message");
+      }
+      String content = jsonMessage.getString("content");
+      if (content == null) {
+        throw new ChatbotException("null message content");
+      }
+      String role = jsonMessage.getString("role");
+      if (role == null) {
+        throw new ChatbotException("null role for message");
+      }
+      
+      return new Message(role, content);
+    }
 
     /**
      * Converts the message to a JSON object representing its attributes.

@@ -8,8 +8,6 @@ import java.net.http.HttpRequest;
 import java.net.http.HttpRequest.BodyPublisher;
 import java.net.http.HttpRequest.BodyPublishers;
 import java.net.http.HttpResponse;
-import org.json.JSONArray;
-import org.json.JSONException;
 import org.json.JSONObject;
 
 /** The class RequestSender  manages the sending of HTTP requests to a server
@@ -48,26 +46,14 @@ public class RequestSender {
   }
 
   /** TODO docs. */
-  private Conversation.Message decodeResponse(String response) {
-    JSONObject jsonResponse = new JSONObject(response);
-    JSONArray choices = jsonResponse.optJSONArray("choices");
-    if (choices == null) {
-      throw new JSONException("null choices");
-    }
-    JSONObject firstChoice = choices.getJSONObject(0);
-    if (firstChoice == null) {
-      throw new JSONException("null first choice");
-    }
-    JSONObject jsonMessage = firstChoice.getJSONObject("message");
-    if (jsonMessage == null) {
-      throw new JSONException("null json message");
-    }
-    String content = jsonMessage.getString("content");
-    if (content == null) {
-      throw new JSONException("null message content");
-    }
-
-    return Conversation.Message.makeAssistantMessage(content);
+  private Conversation.Message decodeResponse(String response)
+      throws ChatbotException {
+    try {
+      JSONObject jsonResponse = new JSONObject(response);
+      return Conversation.Message.fromJsonObject(jsonResponse);
+    } catch (ChatbotException e) {
+      throw e;
+    }  
   }
 
   /** TODO docs. */
