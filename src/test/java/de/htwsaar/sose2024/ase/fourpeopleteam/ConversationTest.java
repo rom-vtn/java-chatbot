@@ -1,8 +1,10 @@
 package de.htwsaar.sose2024.ase.fourpeopleteam;
 
+import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
+import org.json.JSONObject;
 import org.junit.Test;
 
 /** Testing the conversation. */
@@ -40,7 +42,10 @@ public class ConversationTest {
   }
 
   @Test
-  public void messageJsonTest() {
-    //TODO convert to JSON and back
+  public void messageJsonTest() throws ChatbotException {
+    Conversation.Message msg = Conversation.Message.makeAssistantMessage("test assistant message.");
+    JSONObject asJson = msg.toJson();
+    Conversation.Message reconstructed = Conversation.Message.fromJsonObject(asJson);
+    assertEquals(msg, reconstructed);
   }
 }

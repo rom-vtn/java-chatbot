@@ -8,6 +8,8 @@ import java.net.http.HttpRequest;
 import java.net.http.HttpRequest.BodyPublisher;
 import java.net.http.HttpRequest.BodyPublishers;
 import java.net.http.HttpResponse;
+import org.json.JSONArray;
+import org.json.JSONException;
 import org.json.JSONObject;
 
 /** The class RequestSender  manages the sending of HTTP requests to a server
@@ -54,11 +56,27 @@ public class RequestSender {
   private Conversation.Message decodeResponse(String response)
       throws ChatbotException {
     try {
+      //cast to JSON
       JSONObject jsonResponse = new JSONObject(response);
-      return Conversation.Message.fromJsonObject(jsonResponse);
-    } catch (ChatbotException e) {
-      throw e;
-    }  
+      //pick from the response choices
+      JSONArray choices = jsonResponse.optJSONArray("choices");
+      if (choices == null) {
+        throw new ChatbotException("null choices");
+      }
+      //get first choice
+      JSONObject firstChoice = choices.getJSONObject(0);
+      if (firstChoice == null) {
+        throw new ChatbotException("null first choice");
+      }
+      JSONObject jsonMessage = firstChoice.getJSONObject("message");
+      if (jsonMessage == null) {
+        throw new ChatbotException("null json message");
+      }
+      //then convert to Conversation.Message
+      return Conversation.Message.fromJsonObject(firstChoice);
+    } catch (JSONException e) {
+      throw new ChatbotException(e);
+    }
   }
 
   /** Encodes a conversation into a JSON request String which can be sent to the server.
