@@ -20,7 +20,7 @@ public class RequestSender {
     this.baseUrl = baseUrl;
   }
 
-  /** TODO docs. */
+  /** Requests the next message in a conversation to the server and returns the new message. */
   public Conversation.Message requestNextMessage(Conversation conversation)
       throws ChatbotException {
     String requestBody = encodeRequest(conversation);
@@ -45,7 +45,12 @@ public class RequestSender {
     return message;
   }
 
-  /** TODO docs. */
+  /** Decodes a String response from the server into a Conversation.Message object.
+   *
+   * @param response The JSON response string
+   * @return The new message returned by the server
+   * @throws ChatbotException if something went wrong
+   */
   private Conversation.Message decodeResponse(String response)
       throws ChatbotException {
     try {
@@ -56,7 +61,11 @@ public class RequestSender {
     }  
   }
 
-  /** TODO docs. */
+  /** Encodes a conversation into a JSON request String which can be sent to the server.
+   *
+   * @param conversation the conversation to be encoded
+   * @return the JSON request to be sent to the server
+   */
   private String encodeRequest(Conversation conversation) {
     JSONObject conv = new JSONObject();
     conv.put("messages", conversation.toJson());
@@ -64,7 +73,12 @@ public class RequestSender {
     return conv.toString();
   }
 
-  /** TODO docs. */
+  /** Attempts to send a (string) message to the server's endpoint
+   * and returns the response body String.
+   *
+   * @param bodyString the string to be sent as a request body
+   * @return the response body
+   */
   private String attemptSendingMessage(String bodyString)
       throws URISyntaxException, IOException, InterruptedException {
     BodyPublisher bp = BodyPublishers.ofString(bodyString);
