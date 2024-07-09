@@ -23,7 +23,8 @@ public class RequestSender {
   }
 
   /** TODO docs. */
-  public Conversation.Message requestNextMessage(Conversation conversation) throws Exception {
+  public Conversation.Message requestNextMessage(Conversation conversation)
+      throws ChatbotException {
     String requestBody = encodeRequest(conversation);
     String responseBody = null;
     int i;
@@ -39,7 +40,7 @@ public class RequestSender {
     }
 
     if (i == MAX_ATTEMPTS) {
-      throw new Exception("request limit exceeded");
+      throw new ChatbotException("request limit exceeded");
     }
 
     Conversation.Message message = decodeResponse(responseBody);
