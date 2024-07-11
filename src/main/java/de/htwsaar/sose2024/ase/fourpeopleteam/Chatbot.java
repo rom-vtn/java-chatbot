@@ -34,6 +34,7 @@ public class Chatbot {
     try {
       response = requestSender.requestNextMessage(conversation);
     } catch (Exception e) {
+      e.printStackTrace(); //DEBUG
       return false;
     }
     conversation.add(response);

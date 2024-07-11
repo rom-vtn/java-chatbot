@@ -73,7 +73,7 @@ public class RequestSender {
         throw new ChatbotException("null json message");
       }
       //then convert to Conversation.Message
-      return Conversation.Message.fromJsonObject(firstChoice);
+      return Conversation.Message.fromJsonObject(jsonMessage);
     } catch (JSONException e) {
       throw new ChatbotException(e);
     }
