@@ -39,6 +39,6 @@ public class CommandLineInterface implements UserInterface {
    * the scanner to read input from the command line.
    */
   public CommandLineInterface() {
-    scanner = new Scanner(System.in, "UTF_8");
+    scanner = new Scanner(System.in, "UTF-8");
   }
 }
