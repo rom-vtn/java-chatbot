@@ -10,7 +10,7 @@ public class Chatbot {
   
   /**
    * Constructs a chatbot using the given userInterface and requestSender,
-   * as well as a new empty conversation.
+   * as well as a new conversation with only a system message.
    *
    * @param userInterface the user interface to be used
    * @param requestSender the request sender to be used
