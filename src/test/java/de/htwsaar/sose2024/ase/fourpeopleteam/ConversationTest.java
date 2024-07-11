@@ -52,6 +52,8 @@ public class ConversationTest {
     assertEquals(msg, reconstructed);
   }
 
+  //then test equality
+
   @Test
   public void conversationEqualityTest() {
     Conversation c1 = new Conversation();
