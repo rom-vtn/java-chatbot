@@ -75,6 +75,4 @@ public class ConversationTest {
     Conversation reconstructed = Conversation.fromJsonArray(asJson);
     assertEquals(conversation, reconstructed);
   }
-
-  //TODO make sure Conversation is tested appropriately
 }
