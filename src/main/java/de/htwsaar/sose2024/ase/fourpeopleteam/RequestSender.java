@@ -53,7 +53,7 @@ public class RequestSender {
    * @return The new message returned by the server
    * @throws ChatbotException if something went wrong
    */
-  private Conversation.Message decodeResponse(String response)
+  public static Conversation.Message decodeResponse(String response)
       throws ChatbotException {
     try {
       //cast to JSON
