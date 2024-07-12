@@ -1,0 +1,9 @@
+<site name="Java Chatbot Site">
+  <publishDate position="right"></publishDate>
+
+  <skin>
+    <groupId>org.apache.maven.skins</groupId>
+    <artifactId>maven-fluido-skin</artifactId>
+    <version>2.0.0-M9</version>
+  </skin>
+</site>
