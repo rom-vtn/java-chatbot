@@ -23,4 +23,5 @@ public class RequestSenderTest {
     assertEquals(expectedMsg, actualMsg);
 
   }
+  //TODO add a Mockito test
 }
