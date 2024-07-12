@@ -11,6 +11,19 @@
   <name>HTW Saar Java chatbot</name>
   <url>https://github.com/rom-vtn/java-chatbot</url>
 
+  <developers>
+    <developer>
+      <id>rom-vtn</id>
+      <name>Romane Viton</name>
+      <email>contact@romaneviton.fr</email>
+      <roles>
+        <role>developer</role>
+      </roles>
+      <timezone>Europe/Berlin</timezone>
+    </developer>
+    <!-- TODO add other project people -->
+  </developers>
+
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     <maven.compiler.source>11</maven.compiler.source>
