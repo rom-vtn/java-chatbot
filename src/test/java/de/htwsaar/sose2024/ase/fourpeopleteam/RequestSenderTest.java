@@ -2,6 +2,8 @@ package de.htwsaar.sose2024.ase.fourpeopleteam;
 
 import static org.junit.Assert.assertEquals;
 
+import org.json.JSONArray;
+import org.json.JSONObject;
 import org.junit.Test;
 
 /** Tests for the RequestSender. */
@@ -21,6 +23,22 @@ public class RequestSenderTest {
     Conversation.Message actualMsg = RequestSender.decodeResponse(sampleResponse);
 
     assertEquals(expectedMsg, actualMsg);
+
+  }
+
+  @Test
+  public void encodeRequestTest() throws ChatbotException {
+    Conversation conversation = Conversation.makeStandardConversation();
+    conversation.add(Conversation.Message.makeUserMessage("test content"));
+
+    String encoded = RequestSender.encodeRequest(conversation);
+
+    JSONObject decoded = new JSONObject(encoded);
+    JSONArray messages = decoded.getJSONArray("messages");
+
+    Conversation recoded = Conversation.fromJsonArray(messages);
+
+    assertEquals(conversation, recoded);
 
   }
   //TODO add a Mockito test

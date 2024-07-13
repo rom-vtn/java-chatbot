@@ -84,7 +84,7 @@ public class RequestSender {
    * @param conversation the conversation to be encoded
    * @return the JSON request to be sent to the server
    */
-  private String encodeRequest(Conversation conversation) {
+  public static String encodeRequest(Conversation conversation) {
     JSONObject conv = new JSONObject();
     conv.put("messages", conversation.toJson());
     conv.put("max_tokens", 256);
