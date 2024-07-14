@@ -9,6 +9,8 @@
   <version>1.0-SNAPSHOT</version>
 
   <name>HTW Saar Java chatbot</name>
+  <description>A simple CLI Chatbot to interact with an OpenAI-like API.</description>
+  <inceptionYear>2024</inceptionYear>
   <url>https://github.com/rom-vtn/java-chatbot</url>
 
   <developers>
@@ -21,7 +23,31 @@
       </roles>
       <timezone>Europe/Berlin</timezone>
     </developer>
-    <!-- TODO add other project people -->
+    <developer>
+      <id>Arold-Chendjou</id>
+      <name>Chendjou Dzogouloh Arold Stephyl</name>
+      <roles>
+        <role>developer</role>
+      </roles>
+      <timezone>Europe/Berlin</timezone>
+    </developer>
+    <developer>
+      <id>brielmohoms</id>
+      <name>Chrislie Briel Mohomye Yotchouen</name>
+      <roles>
+        <role>developer</role>
+      </roles>
+      <timezone>Europe/Berlin</timezone>
+    </developer>
+    <developer>
+    <!-- TODO get exact github username -->
+      <id>setrathierry</id>
+      <name>Setra Thierry Andriamiadanarivo</name>
+      <roles>
+        <role>developer</role>
+      </roles>
+      <timezone>Europe/Berlin</timezone>
+    </developer>
   </developers>
 
   <properties>
