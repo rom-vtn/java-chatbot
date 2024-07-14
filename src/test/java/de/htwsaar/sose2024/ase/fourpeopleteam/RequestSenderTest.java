@@ -41,5 +41,4 @@ public class RequestSenderTest {
     assertEquals(conversation, recoded);
 
   }
-  //TODO add a Mockito test
 }
