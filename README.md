@@ -1,7 +1,6 @@
 # `java-chatbot`
 
-A simple chatbot to use the OpenAI API to interactively user ChatGPT from a CLI.
-
+A simple chatbot to use an OpenAI-like API to interact with a chatbot from a CLI.
 
 # TODO
 - Put API URLs in a configurable file
