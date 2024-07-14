@@ -101,15 +101,14 @@
         <version>0.8.12</version>
         <executions>
           <execution>
-            <id>pre-test</id>
-            <phase>pre-test</phase>
+            <id>default-prepare-agent</id>
             <goals>
               <goal>prepare-agent</goal>
             </goals>
           </execution>
           <execution>
-            <id>post-test</id>
-            <phase>post-test</phase>
+            <id>report</id>
+            <phase>verify</phase>
             <goals>
               <goal>report</goal>
             </goals>
