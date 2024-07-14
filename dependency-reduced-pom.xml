@@ -5,12 +5,38 @@
   <artifactId>java-chatbot</artifactId>
   <name>HTW Saar Java chatbot</name>
   <version>1.0-SNAPSHOT</version>
+  <description>A simple CLI Chatbot to interact with an OpenAI-like API.</description>
   <url>https://github.com/rom-vtn/java-chatbot</url>
+  <inceptionYear>2024</inceptionYear>
   <developers>
     <developer>
       <id>rom-vtn</id>
       <name>Romane Viton</name>
       <email>contact@romaneviton.fr</email>
+      <roles>
+        <role>developer</role>
+      </roles>
+      <timezone>Europe/Berlin</timezone>
+    </developer>
+    <developer>
+      <id>Arold-Chendjou</id>
+      <name>Chendjou Dzogouloh Arold Stephyl</name>
+      <roles>
+        <role>developer</role>
+      </roles>
+      <timezone>Europe/Berlin</timezone>
+    </developer>
+    <developer>
+      <id>brielmohoms</id>
+      <name>Chrislie Briel Mohomye Yotchouen</name>
+      <roles>
+        <role>developer</role>
+      </roles>
+      <timezone>Europe/Berlin</timezone>
+    </developer>
+    <developer>
+      <id>setrathierry</id>
+      <name>Setra Thierry Andriamiadanarivo</name>
       <roles>
         <role>developer</role>
       </roles>
@@ -124,6 +150,13 @@
             <phase>test</phase>
             <goals>
               <goal>check</goal>
+            </goals>
+          </execution>
+          <execution>
+            <id>verify</id>
+            <phase>verify</phase>
+            <goals>
+              <goal>checkstyle</goal>
             </goals>
           </execution>
         </executions>
