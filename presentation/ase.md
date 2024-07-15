@@ -29,7 +29,7 @@ math: katex
 - Client-Side: Modell mit Methoden
 - Tests (JUnit, Mockito)
 - Statische Analyse (ErrorProne, Checkstyle)
-- Github Actions: mehr Sicherheit
+- Github Actions
 
 ---
 
@@ -187,3 +187,12 @@ jobs:
       run: mvn -B clean package site --file pom.xml
 ```
 
+---
+# Github Actions: Artefakte herstellen 📦
+
+---
+# Github Actions: Artefakte herunterladen ⬇
+![](./img/artefact.png)
+
+$\rightarrow$ Mit dem Shading kann das ÜberJAR ohne Dependencies ausgeführt werden
+- `java -jar <jarName>`
