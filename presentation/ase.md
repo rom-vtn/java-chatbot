@@ -1,13 +1,23 @@
 ---
 marp: true
 header: "ASE SoSe 2024"
-footer: "2024-07-03"
+footer: "2024-07-23"
 paginate: true
 math: katex
 ---
 <style>
     img {
         text-align: center;
+    }
+    .split2 {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 0.5rem;
+    }
+    .split3 {
+        display: grid;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: 0.5rem;
     }
 </style>
 
@@ -22,19 +32,30 @@ math: katex
 
 ---
 
-# Inhalt 📚 
+# Inhalt 📚
+<div class="split2"><div>
+
 - Ziel
 - Server-Side: _`llama-gpt` for Dummies_ 
 - Strukturierung des Verhaltens
 - Client-Side: Modell mit Methoden
+- Reports erstellen
+</div><div>
+
 - Tests (JUnit, Mockito)
 - Statische Analyse (ErrorProne, Checkstyle)
+- Site/Reports
 - Github Actions
+</div></div>
 
 ---
+# Ziel 🧭
+## Offene Frage ❓ 
+- Wie würdet ihr einen Chatbot erstellen?
+- Welches Verhalten hätte er?
+- An welchen Stellen könnte die Automatisierung stattfinden?
 
-![bg left:40% w:350](https://cdn.pixabay.com/photo/2012/04/24/21/35/screen-40956_960_720.png)
-
+---
 # Ziel 🧭
 ## Was wollen wir eigentlich?
 - Nachrichten:
@@ -45,6 +66,7 @@ math: katex
   - bekommen & speichern
   - darstellen
 
+![bg left:40% w:350](https://cdn.pixabay.com/photo/2012/04/24/21/35/screen-40956_960_720.png)
 > Bild: [pixabay](https://cdn.pixabay.com/photo/2012/04/24/21/35/screen-40956_960_720.png)
 
 ---
@@ -66,7 +88,7 @@ cd llama-gpt
 
 $\rightarrow$ UI auf `http://localhost:3000`, API auf `http://localhost:3001` 
 
-**Aber: das können sehr schwere Modelle sein!**
+**Aber: das können sehr schwere Modelle sein! (deswegen: Server-Side)**
 
 ---
 # Server-Side: *`llama-gpt` for Dummies* 🤖
@@ -111,6 +133,10 @@ $\rightarrow$ UI auf `http://localhost:3000`, API auf `http://localhost:3001`
 
 $\implies$ Antwort: **verschiedene Klassen nutzen**
 
+<br>
+
+$\rightarrow$ ***Wie würden diese Klassen miteinander kommunizieren ?***
+
 ---
 # Client-Side: Überblick 🛠
 - 4 Hauptklassen
@@ -119,7 +145,7 @@ $\implies$ Antwort: **verschiedene Klassen nutzen**
   - `RequestSender`
   - `Conversation`
 
-![bg right contain](./img/classes.drawio.svg)
+![bg right:47% contain](./img/classes.drawio.svg)
 
 ---
 
@@ -142,7 +168,7 @@ $\implies$ Antwort: **verschiedene Klassen nutzen**
 ---
 
 # Tests 🧪
-## JaCoCo: Testabdeckung
+## JaCoCo: Testabdeckung 🔎 
 - Kann helfen, Stellen zu finden, die nicht getestet sind
 - "Welche Tests soll ich jetzt schreiben?"
 
@@ -156,6 +182,25 @@ $\implies$ Antwort: **verschiedene Klassen nutzen**
   - `checkstyle`, um zu sichern, dass der Code an den Stilregeln angepasst ist (🤬)
 
 ![w:1500](./img/checkstyleViolation.png)
+
+---
+# Site/Reports 📢
+- `site`-Phase des Maven-Lifecycles
+- `pom.xml` enthält Projektdaten
+- Möglichkeit, den Stil in `src/site/site.xml` zu definieren
+- Reports können hinzugefügt werden (`reportSets` oder Binding an einer Phase)
+  - Beispiel: *JaCoCo*
+
+---
+# Site/Reports 📢
+
+![bg right fit](./img/jacoco-pom.png)
+
+---
+# Github Actions: die nächste Ebene 🚀 
+- Was kann Github Actions bringen?
+  - Sicherheit?
+  - Einen geringeren Zeitaufwand?
 
 ---
 
@@ -188,11 +233,31 @@ jobs:
 ```
 
 ---
-# Github Actions: Artefakte herstellen 📦
+# Github Actions
+## Package/Pages erstellen 📦 
+> Aus [.github/workflows/maven.yml](https://github.com/rom-vtn/java-chatbot/blob/main/.github/workflows/maven.yml)
+```yaml
+    - name: Configure GitHub Pages
+      uses: actions/configure-pages@v3
+
+    - name: Upload GitHub Pages artifact
+      uses: actions/upload-pages-artifact@v1
+      with:
+        path: target/site
+```
+---
+# Github Actions
+## Artefakte herunterladen ⬇
+![w:1500](./img/artefact.png)
 
 ---
-# Github Actions: Artefakte herunterladen ⬇
-![](./img/artefact.png)
+# Github Actions: weitere Automatisierungen
+<div class="split2"><div>
 
+## Shading
 $\rightarrow$ Mit dem Shading kann das ÜberJAR ohne Dependencies ausgeführt werden
 - `java -jar <jarName>`
+</div><div>
+
+## 
+</div></div>
