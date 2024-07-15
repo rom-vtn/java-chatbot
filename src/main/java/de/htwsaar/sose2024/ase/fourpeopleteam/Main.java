@@ -9,7 +9,8 @@ public class Main {
    */
   public static void main(String[] args) {
     UserInterface ui = new CommandLineInterface();
-    RequestSender rs = new RequestSender("https://gptapi.oc.romaneviton.fr");
+    String url = ui.getInput();
+    RequestSender rs = new RequestSender(url);
 
     Chatbot chatbot = new Chatbot(ui, rs);
 
