@@ -22,6 +22,7 @@ public class RequestSender {
     this.baseUrl = baseUrl;
   }
 
+
   /** Requests the next message in a conversation to the server and returns the new message. */
   public Conversation.Message requestNextMessage(Conversation conversation)
       throws ChatbotException {
