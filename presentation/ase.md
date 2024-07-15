@@ -252,12 +252,12 @@ jobs:
 
 ---
 # Github Actions: weitere Automatisierungen
-<div class="split2"><div>
+## Dependabot
 
-## Shading
-$\rightarrow$ Mit dem Shading kann das ÜberJAR ohne Dependencies ausgeführt werden
-- `java -jar <jarName>`
-</div><div>
+![h:450](./img/depedabotPR.png)
 
-## 
-</div></div>
+---
+
+# Andere Tools
+## `dependency:analyze`
+![w:1500](./img/dependencyAnalyze.png)
