@@ -1,10 +1,23 @@
 package de.htwsaar.sose2024.ase.fourpeopleteam;
 
 import static org.junit.Assert.assertEquals;
+import static org.mockito.Mockito.any;
+import static org.mockito.Mockito.when;
+
+import org.junit.Before;
+import org.junit.Test;
+
+import org.mockito.Mock;
+import org.mockito.MockitoAnnotations;
+
+import java.net.http.HttpClient;
+import java.net.http.HttpRequest;
+import java.net.http.HttpResponse;
+
+import java.io.IOException;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
-import org.junit.Test;
 
 /** Tests for the RequestSender. */
 public class RequestSenderTest {
@@ -40,5 +53,43 @@ public class RequestSenderTest {
 
     assertEquals(conversation, recoded);
 
+  }
+
+  private HttpClient httpClient;
+  @Mock
+  private HttpResponse<String> httpResponse;
+  @Mock
+  private RequestSender requestSender;
+
+  String baseURL;
+
+  @Before
+  public void setUp(){
+    MockitoAnnotations.openMocks(this);
+    requestSender = new RequestSender(baseURL);
+  }
+
+  @Test
+  public void testRequestNextMessage() throws ChatbotException, IOException, InterruptedException {
+
+    Conversation conversation = Conversation.makeStandardConversation();
+    Conversation.Message expectedMessage = Conversation.Message.makeAssistantMessage("Hello");
+
+    JSONObject jsonMessage = new JSONObject();
+    jsonMessage.put("role", "assistant");
+    jsonMessage.put("content", "Hello");
+
+    JSONObject firstChoice = new JSONObject();
+    firstChoice.put("message", jsonMessage);
+
+    JSONObject jsonResponse = new JSONObject();
+    jsonResponse.put("choices", new JSONArray().put(firstChoice));
+
+    when(httpClient.send(any(HttpRequest.class), any(HttpResponse.BodyHandler.class))).thenReturn(httpResponse);
+    when(httpResponse.body()).thenReturn(jsonResponse.toString());
+
+    Conversation.Message actualMessage = requestSender.requestNextMessage(conversation);
+
+    assertEquals(expectedMessage, actualMessage);
   }
 }

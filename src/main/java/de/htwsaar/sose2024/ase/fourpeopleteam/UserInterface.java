@@ -7,7 +7,7 @@ package de.htwsaar.sose2024.ase.fourpeopleteam;
 public interface UserInterface {
 
   /**
-   * Dispays the given string to the interface.
+   * Displays the given string to the interface.
    *
    * @param content the content to be displayed
    */
