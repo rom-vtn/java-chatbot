@@ -276,3 +276,4 @@ $\implies$ ***Sie erlaubt, sich darum zu kümmern, was wirklich zählt***
 
 # Danke für Ihre Aufmerksamkeit!
 ## Noch Fragen?
+> Alles zum Code (inkl. Präsentation) befindet sich im Github-Repo: https://github.com/rom-vtn/java-chatbot
