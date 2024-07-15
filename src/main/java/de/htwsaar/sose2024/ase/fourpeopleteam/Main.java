@@ -9,7 +9,8 @@ public class Main {
    */
   public static void main(String[] args) {
     UserInterface ui = new CommandLineInterface();
-    String url = ui.getInput();
+    String url = ui.getInput("Please input the API URL");
+    ui.show("Aaaaalright, things are set up now, you can now talk to the bot at that address!");
     RequestSender rs = new RequestSender(url);
 
     Chatbot chatbot = new Chatbot(ui, rs);

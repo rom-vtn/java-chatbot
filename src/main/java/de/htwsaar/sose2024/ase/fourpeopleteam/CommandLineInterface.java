@@ -24,11 +24,10 @@ public class CommandLineInterface implements UserInterface {
 
   /**
    * This method gets the user input.
-   * It prompts the user for input and reads it from the command line
+   * It prompts the user for input and reads it from the command line.
    */
   @Override
   public String getInput() {
-    System.out.println("Ask me something\n");
     System.out.print("> ");
     return scanner.nextLine();
   }

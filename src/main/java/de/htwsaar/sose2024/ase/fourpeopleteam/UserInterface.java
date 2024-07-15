@@ -20,4 +20,14 @@ public interface UserInterface {
    */
   String getInput();
 
+  /**
+   * Shows a prompt and gets input. Is equivalent to show(prompt) followed by getInput().
+   *
+   * @param prompt the prompt to be shown
+   * @return the string typed by the user
+   */
+  default String getInput(String prompt) {
+    show(prompt);
+    return getInput();
+  }
 }
