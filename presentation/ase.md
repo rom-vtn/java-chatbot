@@ -27,8 +27,8 @@ math: katex
 
 > Viton Romane, DFIW, 5006508
 > Chendjou Dzogouloh Arold Stephyl, DFIW, 5012980
-> Setra Thierry Andriamiadanarivo, DFIW, 0388051
-> Chrislie Briel Mohomye Yotchouen, PI, 5013415
+> Setra Thierry Andriamiadanarivo, DFIW, 3880516
+> Chrislie Briel Mohomye Yotchouen, PIB, 5013415
 
 ---
 
@@ -38,14 +38,14 @@ math: katex
 - Ziel
 - Server-Side: _`llama-gpt` for Dummies_ 
 - Strukturierung des Verhaltens
-- Client-Side: Modell mit Methoden
-- Reports erstellen
+- Client-Side: Überblick
+- Tests (JUnit, Mockito)
 </div><div>
 
-- Tests (JUnit, Mockito)
-- Statische Analyse (ErrorProne, Checkstyle)
+- Statische Codeanalyse
 - Site/Reports
 - Github Actions
+- Zusammenfassung
 </div></div>
 
 ---
@@ -258,6 +258,21 @@ jobs:
 
 ---
 
-# Andere Tools
-## `dependency:analyze`
+# Andere nützliche Tools
+## `versions:use-latest-releases`, `dependency:analyze`
 ![w:1500](./img/dependencyAnalyze.png)
+
+---
+
+# Zusammenfassung ✏
+- Automatisierung ist:
+  - effizienter
+  - sicherer
+  - wartbarer
+
+$\implies$ ***Sie erlaubt, sich darum zu kümmern, was wirklich zählt*** 
+
+---
+
+# Danke für Ihre Aufmerksamkeit!
+## Noch Fragen?
