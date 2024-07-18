@@ -288,6 +288,33 @@
           </execution>
         </executions>
       </plugin>
+      <!-- Exec Maven Plugin Configuration -->
+      <plugin>
+        <groupId>org.codehaus.mojo</groupId>
+        <artifactId>exec-maven-plugin</artifactId>
+        <version>3.1.0</version>
+        <executions>
+          <execution>
+            <goals>
+              <goal>java</goal>
+            </goals>
+          </execution>
+        </executions>
+        <configuration>
+          <mainClass>de.htwsaar.sose2024.ase.fourpeopleteam.Main</mainClass>
+          <!-- ### add arguments
+          <arguments>
+            <argument>arg1</argument>
+            <argument>arg2</argument>
+          </arguments>
+          ### add environmentVariables
+          <environmentVariables>
+            <PATH>/usr/local/bin:/usr/bin:/bin</PATH>
+          </environmentVariables>
+          #### Classpath
+          <classpathScope>test</classpathScope>-->
+        </configuration>
+      </plugin>
     </plugins>
   </build>
 </project>
