@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>Chatbot.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">HTW Saar Java chatbot</a> &gt; <a href="index.source.html" class="el_package">de.htwsaar.sose2024.ase.fourpeopleteam</a> &gt; <span class="el_source">Chatbot.java</span></div><h1>Chatbot.java</h1><pre class="source lang-java linenums">package de.htwsaar.sose2024.ase.fourpeopleteam;
+
+/** Represents a chatbot that combines a user interface,
+ * a stored conversation and a request sender.
+ */
+public class Chatbot {
+  private UserInterface userInterface;
+  private Conversation conversation;
+  private RequestSender requestSender;
+  
+  /**
+   * Constructs a chatbot using the given userInterface and requestSender,
+   * as well as a new conversation with only a system message.
+   *
+   * @param userInterface the user interface to be used
+   * @param requestSender the request sender to be used
+   */
+<span class="fc" id="L18">  public Chatbot(UserInterface userInterface, RequestSender requestSender) {</span>
+<span class="fc" id="L19">    this.userInterface = userInterface;</span>
+<span class="fc" id="L20">    this.requestSender = requestSender;</span>
+<span class="fc" id="L21">    this.conversation = Conversation.makeStandardConversation();</span>
+<span class="fc" id="L22">  }</span>
+
+  /**
+   * Runs a conversation round (ask for message, send, recieve and display response).
+   *
+   * @return whether the conversation should keep going (true) or exit (false)
+   */
+  public boolean conversationRound() {
+<span class="fc" id="L30">    String input = userInterface.getInput();</span>
+<span class="fc" id="L31">    Conversation.Message userMessage = Conversation.Message.makeUserMessage(input);</span>
+<span class="fc" id="L32">    conversation.add(userMessage);</span>
+<span class="fc" id="L33">    Conversation.Message response = null;</span>
+    try {
+<span class="fc" id="L35">      response = requestSender.requestNextMessage(conversation);</span>
+<span class="nc" id="L36">    } catch (Exception e) {</span>
+<span class="nc" id="L37">      e.printStackTrace(); //DEBUG</span>
+<span class="nc" id="L38">      return false;</span>
+<span class="fc" id="L39">    }</span>
+<span class="fc" id="L40">    conversation.add(response);</span>
+<span class="fc" id="L41">    userInterface.show(response.getContent());</span>
+<span class="fc" id="L42">    return true;</span>
+  }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.12.202403310830</span></div></body></html>

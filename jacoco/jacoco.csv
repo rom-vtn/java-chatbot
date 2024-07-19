@@ -1,0 +1,9 @@
+GROUP,PACKAGE,CLASS,INSTRUCTION_MISSED,INSTRUCTION_COVERED,BRANCH_MISSED,BRANCH_COVERED,LINE_MISSED,LINE_COVERED,COMPLEXITY_MISSED,COMPLEXITY_COVERED,METHOD_MISSED,METHOD_COVERED
+HTW Saar Java chatbot,de.htwsaar.sose2024.ase.fourpeopleteam,Chatbot,5,43,0,0,3,14,0,2,0,2
+HTW Saar Java chatbot,de.htwsaar.sose2024.ase.fourpeopleteam,Conversation.Message,26,85,3,7,4,21,4,10,1,8
+HTW Saar Java chatbot,de.htwsaar.sose2024.ase.fourpeopleteam,RequestSender,58,83,5,5,15,25,6,6,1,6
+HTW Saar Java chatbot,de.htwsaar.sose2024.ase.fourpeopleteam,Conversation,8,118,2,10,3,29,3,10,1,6
+HTW Saar Java chatbot,de.htwsaar.sose2024.ase.fourpeopleteam,ChatbotException,8,0,0,0,4,0,2,0,2,0
+HTW Saar Java chatbot,de.htwsaar.sose2024.ase.fourpeopleteam,Main,34,0,2,0,10,0,3,0,2,0
+HTW Saar Java chatbot,de.htwsaar.sose2024.ase.fourpeopleteam,CommandLineInterface,21,0,0,0,7,0,3,0,3,0
+HTW Saar Java chatbot,de.htwsaar.sose2024.ase.fourpeopleteam,UserInterface,6,0,0,0,2,0,1,0,1,0

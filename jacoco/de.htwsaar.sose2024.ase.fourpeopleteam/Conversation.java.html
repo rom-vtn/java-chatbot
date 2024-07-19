@@ -1,0 +1,199 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>Conversation.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">HTW Saar Java chatbot</a> &gt; <a href="index.source.html" class="el_package">de.htwsaar.sose2024.ase.fourpeopleteam</a> &gt; <span class="el_source">Conversation.java</span></div><h1>Conversation.java</h1><pre class="source lang-java linenums">package de.htwsaar.sose2024.ase.fourpeopleteam;
+
+import java.util.ArrayList;
+import java.util.Objects;
+import org.json.JSONArray;
+import org.json.JSONObject;
+
+/**
+ * Represents a conversation consisting of messages exchanged between different roles
+ * (the User and the assistant).
+ */
+public class Conversation {
+  private ArrayList&lt;Message&gt; messages;
+
+  /** Creates a Conversation containing no messages whatsoever
+   * (no system message either). 
+   */
+<span class="fc" id="L18">  public Conversation() {</span>
+<span class="fc" id="L19">    messages = new ArrayList&lt;&gt;();</span>
+<span class="fc" id="L20">  }</span>
+
+  /**
+   * Creates a standard conversation with an initial system message.
+   *
+   * @return new conversation with a predefined message
+   */
+  public static Conversation makeStandardConversation() {
+<span class="fc" id="L28">    Conversation conv = new Conversation();</span>
+<span class="fc" id="L29">    Message firstMessage = new Message(</span>
+        &quot;system&quot;,
+        &quot;You are a very helpful AI assistant. Please respond very concisely.&quot;);
+
+<span class="fc" id="L33">    conv.add(firstMessage);</span>
+
+<span class="fc" id="L35">    return conv;</span>
+  }
+
+  /**
+   * Builds a conversation from the a JSON array,
+   * which is assumed to contain all the messages as JSON as well.
+   *
+   * @param jsonArray The json array to build the conversation from
+   * @return the resulting conversation
+   * @throws ChatbotException if something went wrong
+   */
+  public static Conversation fromJsonArray(JSONArray jsonArray) throws ChatbotException {
+<span class="fc" id="L47">    Conversation conversation = new Conversation();</span>
+<span class="fc bfc" id="L48" title="All 2 branches covered.">    for (int i = 0; i &lt; jsonArray.length(); i++) {</span>
+<span class="fc" id="L49">      JSONObject jsonObject = jsonArray.getJSONObject(i);</span>
+<span class="fc" id="L50">      Conversation.Message msg = Conversation.Message.fromJsonObject(jsonObject);</span>
+<span class="fc" id="L51">      conversation.add(msg);</span>
+    }
+<span class="fc" id="L53">    return conversation;</span>
+  }
+
+  /**
+   * Add a message to the conversation.
+   *
+   * @param message to be added.
+   */
+  public void add(Message message) {
+<span class="fc" id="L62">    messages.add(message);</span>
+<span class="fc" id="L63">  }</span>
+
+  /**
+   * converts the conversation to a JSON array representing its messages.
+   *
+   * @return the JSON array
+   */
+  public JSONArray toJson() {
+<span class="fc" id="L71">    JSONArray arr = new JSONArray();</span>
+<span class="fc bfc" id="L72" title="All 2 branches covered.">    for (Message m : messages) {</span>
+<span class="fc" id="L73">      arr.put(m.toJson());</span>
+<span class="fc" id="L74">    }</span>
+<span class="fc" id="L75">    return arr;</span>
+  }
+
+  /** The Message class represents a single message in the conversation,
+   * including its role and content.
+   */
+  public static class Message {
+    private String role;
+    private String content;
+
+<span class="fc" id="L85">    public Message(String role, String content) {</span>
+<span class="fc" id="L86">      this.role = role;</span>
+<span class="fc" id="L87">      this.content = content;</span>
+<span class="fc" id="L88">    }</span>
+
+    /** 
+     * Creates a user message with the specified content.
+     *
+     * @param content the content of the user message
+     * @return a new Message with the role &quot;user&quot;
+     */
+    public static Message makeUserMessage(String content) {
+<span class="fc" id="L97">      return new Message(&quot;user&quot;, content);</span>
+    }
+
+    /** 
+     * Creates an assistant message with the specified content.
+     *
+     * @param content the content of the assistant message
+     * @return a new Message with the role &quot;assistant&quot;
+     */
+    public static Message makeAssistantMessage(String content) {
+<span class="fc" id="L107">      return new Message(&quot;assistant&quot;, content);</span>
+    }
+
+    /**
+     * Creates a message from the given JSON object.
+     *
+     * @param jsonMessage The JSON Object representing the message to decode.
+     * @return the message contained in the response
+     */
+    public static Message fromJsonObject(JSONObject jsonMessage) throws ChatbotException {
+<span class="fc" id="L117">      String content = jsonMessage.getString(&quot;content&quot;);</span>
+<span class="pc bpc" id="L118" title="1 of 2 branches missed.">      if (content == null) {</span>
+<span class="nc" id="L119">        throw new ChatbotException(&quot;null message content&quot;);</span>
+      }
+<span class="fc" id="L121">      String role = jsonMessage.getString(&quot;role&quot;);</span>
+<span class="pc bpc" id="L122" title="1 of 2 branches missed.">      if (role == null) {</span>
+<span class="nc" id="L123">        throw new ChatbotException(&quot;null role for message&quot;);</span>
+      }
+      
+<span class="fc" id="L126">      return new Message(role, content);</span>
+    }
+
+    /**
+     * Converts the message to a JSON object representing its attributes.
+     *
+     * @return the JSON object representing the message
+     */
+    public JSONObject toJson() {
+<span class="fc" id="L135">      JSONObject obj = new JSONObject();</span>
+<span class="fc" id="L136">      obj.put(&quot;role&quot;, this.role);</span>
+<span class="fc" id="L137">      obj.put(&quot;content&quot;, this.content);</span>
+<span class="fc" id="L138">      return obj;</span>
+    }
+
+    /** 
+     * Gets the role of the sender of the message.
+     *
+     * @return the role of the sender
+     */
+    public String getRole() {
+<span class="fc" id="L147">      return role;</span>
+    }
+
+    /** 
+     * Gets the content of the message.
+     *
+     * @return the content of the sender
+     */
+    public String getContent() {
+<span class="fc" id="L156">      return content;</span>
+    }
+
+    @Override
+    public boolean equals(Object other) {
+<span class="pc bpc" id="L161" title="1 of 2 branches missed.">      if (!(other instanceof Message)) {</span>
+<span class="nc" id="L162">        return false;</span>
+      }
+<span class="fc" id="L164">      Message otherMessage = (Message) other;</span>
+<span class="fc bfc" id="L165" title="All 2 branches covered.">      return otherMessage.getRole().equals(role)</span>
+<span class="fc bfc" id="L166" title="All 2 branches covered.">        &amp;&amp; otherMessage.getContent().equals(content);</span>
+    }
+
+    @Override
+    public int hashCode() {
+<span class="nc" id="L171">      return Objects.hash(this.role, this.content);</span>
+    }
+  }
+
+  @Override
+  public boolean equals(Object other) {
+<span class="pc bpc" id="L177" title="1 of 2 branches missed.">    if (!(other instanceof Conversation)) {</span>
+<span class="nc" id="L178">      return false;</span>
+    }
+<span class="fc" id="L180">    Conversation otherConv = (Conversation) other;</span>
+<span class="fc bfc" id="L181" title="All 2 branches covered.">    if (messages.size() != otherConv.messages.size()) {</span>
+<span class="fc" id="L182">      return false;</span>
+    }
+<span class="fc bfc" id="L184" title="All 2 branches covered.">    for (int i = 0; i &lt; messages.size(); i++) {</span>
+<span class="fc" id="L185">      Message ourMessage = messages.get(i);</span>
+<span class="fc" id="L186">      Message theirMessage = otherConv.messages.get(i);</span>
+<span class="pc bpc" id="L187" title="1 of 2 branches missed.">      if (!ourMessage.equals(theirMessage)) {</span>
+<span class="nc" id="L188">        return false;</span>
+      }
+    }
+<span class="fc" id="L191">    return true;</span>
+  }
+
+  @Override
+  public int hashCode() {
+<span class="nc" id="L196">    return this.messages.hashCode();</span>
+  }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.12.202403310830</span></div></body></html>
