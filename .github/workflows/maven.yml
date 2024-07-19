@@ -54,8 +54,9 @@ jobs:
       uses: actions/upload-pages-artifact@v1
       with:
         path: staging/site
-    # - name: Deploy 🚀
-    #   uses: JamesIves/github-pages-deploy-action@v4
-    #   with:
-    #     folder: target/site # The folder the action should deploy.
+    # TODO move deploy out of build one day
+    - name: Deploy 🚀
+      uses: JamesIves/github-pages-deploy-action@v4
+      with:
+        folder: target/site
 
