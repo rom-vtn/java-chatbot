@@ -1,22 +1,13 @@
 package de.htwsaar.sose2024.ase.fourpeopleteam;
 
 import static org.junit.Assert.assertEquals;
-import static org.mockito.Mockito.any;
-import static org.mockito.Mockito.when;
+import static org.mockito.ArgumentMatchers.anyString;
+import static org.mockito.Mockito.doReturn;
+import static org.mockito.Mockito.spy;
 
-import java.io.IOException;
-import java.net.http.HttpClient;
-import java.net.http.HttpRequest;
-import java.net.http.HttpResponse;
 import org.json.JSONArray;
 import org.json.JSONObject;
-import org.junit.Before;
 import org.junit.Test;
-import org.junit.jupiter.api.Disabled;
-import org.junit.jupiter.api.condition.DisabledIf;
-import org.mockito.Mock;
-import org.mockito.MockitoAnnotations;
-
 
 /** Tests for the RequestSender. */
 public class RequestSenderTest {
@@ -54,44 +45,30 @@ public class RequestSenderTest {
 
   }
 
-  private HttpClient httpClient;
-  @Mock
-  private HttpResponse<String> httpResponse;
-  @Mock
-  private RequestSender requestSender;
+  @Test
+  public void testRequestNextMessage() throws Exception {
 
-  String baseUrl;
+    JSONObject jsonMessage = new JSONObject();
+    jsonMessage.put("role", "assistant");
+    jsonMessage.put("content", "Hello");
 
-  @Before
-  public void setUp() {
-    MockitoAnnotations.openMocks(this);
-    requestSender = new RequestSender(baseUrl);
+    JSONObject firstChoice = new JSONObject();
+    firstChoice.put("message", jsonMessage);
+
+    JSONObject jsonResponse = new JSONObject();
+    jsonResponse.put("choices", new JSONArray().put(firstChoice));
+
+    RequestSender realRequestSender = new RequestSender("http://example.com");
+    RequestSender spyRequestSender = spy(realRequestSender);
+    doReturn(jsonResponse.toString())
+        .when(spyRequestSender)
+        .attemptSendingMessageTo(anyString(), anyString());
+
+    Conversation conversation = Conversation.makeStandardConversation();
+    Conversation.Message expectedMessage = Conversation.Message.makeAssistantMessage("Hello");
+
+    Conversation.Message actualMessage = spyRequestSender.requestNextMessage(conversation);
+
+    assertEquals(expectedMessage, actualMessage);
   }
-
-  //FIXME test not working
-  // @Test
-  // public void testRequestNextMessage()
-  //     throws ChatbotException, IOException, InterruptedException {
-
-  //   JSONObject jsonMessage = new JSONObject();
-  //   jsonMessage.put("role", "assistant");
-  //   jsonMessage.put("content", "Hello");
-
-  //   JSONObject firstChoice = new JSONObject();
-  //   firstChoice.put("message", jsonMessage);
-
-  //   JSONObject jsonResponse = new JSONObject();
-  //   jsonResponse.put("choices", new JSONArray().put(firstChoice));
-
-  //   when(httpClient.send(any(HttpRequest.class), any(HttpResponse.BodyHandler.class)))
-  //       .thenReturn(httpResponse);
-  //   when(httpResponse.body()).thenReturn(jsonResponse.toString());
-
-  //   Conversation conversation = Conversation.makeStandardConversation();
-  //   Conversation.Message expectedMessage = Conversation.Message.makeAssistantMessage("Hello");
-
-  //   Conversation.Message actualMessage = requestSender.requestNextMessage(conversation);
-
-  //   assertEquals(expectedMessage, actualMessage);
-  // }
 }

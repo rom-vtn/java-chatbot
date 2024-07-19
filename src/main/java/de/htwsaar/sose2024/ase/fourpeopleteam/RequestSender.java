@@ -100,11 +100,25 @@ public class RequestSender {
    */
   private String attemptSendingMessage(String bodyString)
       throws URISyntaxException, IOException, InterruptedException {
+    return attemptSendingMessageTo(
+        bodyString,
+        baseUrl + "/v1/chat/completions");
+  }
+
+  /** Attempts to send a (string) message to the specified URL
+   * and returns the response body String.
+   *
+   * @param bodyString the string to be sent as a request body
+   * @param url the URL to send the body to
+   * @return the response body
+   */
+  public String attemptSendingMessageTo(String bodyString, String url)
+      throws URISyntaxException, IOException, InterruptedException {
     BodyPublisher bp = BodyPublishers.ofString(bodyString);
 
     HttpClient client = HttpClient.newHttpClient();
     HttpRequest request = HttpRequest
-        .newBuilder(new URI(baseUrl + "/v1/chat/completions")).POST(bp).build();
+        .newBuilder(new URI(url)).POST(bp).build();
 
     //NOTE: synchronous
     HttpResponse<String> response = client.send(request, HttpResponse.BodyHandlers.ofString());
