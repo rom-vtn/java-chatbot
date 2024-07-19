@@ -40,6 +40,7 @@ jobs:
     #     distribution: 'temurin'
     # - run: mvn --batch-mode --update-snapshots verify
     - run: mkdir staging && cp target/*.jar staging
+    - run: cp target/site staging
     - uses: actions/upload-artifact@v4
       with:
         name: Package
@@ -51,8 +52,8 @@ jobs:
 
     - name: Upload GitHub Pages artifact
       uses: actions/upload-pages-artifact@v1
-      # with:
-        # path: target/site
+      with:
+        path: staging/site
     # - name: Deploy 🚀
     #   uses: JamesIves/github-pages-deploy-action@v4
     #   with:
